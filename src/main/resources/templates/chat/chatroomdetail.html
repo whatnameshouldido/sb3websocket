@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>채팅방 {{chatRoomDto.roomName}}</title>
+    <script language="JavaScript" src="/js/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <h1>{{chatRoomDto.roomName}}</h1>
+    <form method="post" action="">
+        <label for="writer">대화명</label><input type="text" minlength="1" id="writer" name="writer" value="{{writer}}" readonly />
+        <label for="message">메세지</label><input type="text" minlength="1" id="message" name="message" />
+        <input type="submit" value="대화 전송">
+    </form>
+    <ul>
+        <li>채팅 내용</li>
+        {{#chatMessageDtoList}}
+        <li>{{writer}} : {{message}}</li>
+        {{/chatMessageDtoList}}
+    </ul>
+</body>
+</html>

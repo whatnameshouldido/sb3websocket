@@ -6,7 +6,7 @@ import java.util.*;
 
 @Service
 public class ChatRoomService {
-    private Map<String, ChatRoomDto> chatRoomDtoMap = new LinkedHashMap<>();
+    private final Map<String, ChatRoomDto> chatRoomDtoMap = new LinkedHashMap<>();
 
     public ChatRoomDto insert(String roomName) {
         ChatRoomDto newRoom = ChatRoomDto.builder()
