@@ -5,6 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.springframework.web.socket.WebSocketSession;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,4 +18,5 @@ import lombok.experimental.SuperBuilder;
 public class ChatRoomDto {
     private String roomName;
     private String roomId;
+    private List<WebSocketSession> sessionList = new ArrayList<>();
 }
