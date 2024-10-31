@@ -14,7 +14,6 @@ import java.util.List;
 @Slf4j
 @Component
 public class ChatWebSocketHandler extends TextWebSocketHandler {
-
     @Autowired
     private ChatRoomService chatRoomService;
 
@@ -30,12 +29,11 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
             List<WebSocketSession> sessionList = byRoomId.getSessionList();
             if (chatMessageDto.getMsgType() == ChatMessageDto.ChatMessageType.ENTER) {
                 sessionList.add(session);
-//                this.sendMessageSessionsInRoom(chatMessageDto, sessionList);
+                this.sendMessageSessionsInRoom(chatMessageDto, sessionList);
             } else if (chatMessageDto.getMsgType() == ChatMessageDto.ChatMessageType.OUT) {
                 sessionList.remove(session);
-//                this.sendMessageSessionsInRoom(chatMessageDto, sessionList);
+                this.sendMessageSessionsInRoom(chatMessageDto, sessionList);
             } else if (chatMessageDto.getMsgType() == ChatMessageDto.ChatMessageType.MESSAGE) {
-                sessionList.remove(session);
                 this.sendMessageSessionsInRoom(chatMessageDto, sessionList);
             }
         } catch (Exception ex) {
@@ -47,7 +45,11 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
         String msg = this.objectMapper.writeValueAsString(chatMessageDto.getMessage());
         TextMessage tm = new TextMessage(msg);
         for (WebSocketSession webSocketSession : sessionList) {
-            webSocketSession.sendMessage(tm);
+            try {
+                webSocketSession.sendMessage(tm);
+            } catch (IOException e) {
+                log.error(e.toString());
+            }
         }
     }
 }
