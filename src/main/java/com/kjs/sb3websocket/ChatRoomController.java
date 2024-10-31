@@ -25,7 +25,7 @@ public class ChatRoomController {
     }
 
     @GetMapping("/enter")   // GET ? 와 &
-    // @GetMapping("/enter/{roomId}/{writer}") // GET 주소로 데이터 전달
+//     @GetMapping("/enter/{roomId}/{writer}") // GET 주소로 데이터 전달
     public String enterChatRoom(Model model
             , @RequestParam String roomId   // GET ? 와 &
 //            , @PathVariable String roomId   // GET 주소

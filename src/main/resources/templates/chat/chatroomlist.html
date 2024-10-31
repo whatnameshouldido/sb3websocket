@@ -13,8 +13,8 @@
 
     $.enterChatRoom = (roomId) => {
         let writer = prompt('대화명을 입력하세요');
-        // let url = `/chat/enter?roomId=${roomId}&writer=${writer}`;   // GET ? 와 &
-        let url = `/chat/enter/${roomId}/${writer}`;    // GET 주소
+        let url = `/chat/enter?roomId=${roomId}&writer=${writer}`;   // GET ? 와 &
+        // let url = `/chat/enter/${roomId}/${writer}`;    // GET 주소
         document.location.href = url;
     }
 
