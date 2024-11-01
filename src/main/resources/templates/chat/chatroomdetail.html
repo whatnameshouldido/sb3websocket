@@ -21,7 +21,8 @@
 </html>
 
 <script>
-    let chatUrl = "ws://localhost:8089/ws/chat";
+    // let chatUrl = "ws://localhost:8077/ws/chat";
+    let chatUrl = "ws://{{hostUrl}}/ws/chat";
     let webSocket = new WebSocket(chatUrl);
 
     webSocket.onopen = function (param) {
@@ -31,26 +32,30 @@
             "msgType": "ENTER"
             , "roomId": "{{chatRoomDto.roomId}}"
             , "writer": writer
-            , "message": writer + "님이 들어왔습니다."
+            , "message": ""
         };
         webSocket.send(JSON.stringify(chatMessageDto));
     }
 
     webSocket.onmessage = function (param) {
         console.log(param.data);
+        let msgObj = JSON.parse(param.data);
         let msgUl = $("#msgUl");
-        let liHtml = `<li>${param.data}</li>`;
+        let liHtml = `<li><span>${msgObj.writer}</span> &nbsp; : &nbsp; <span>${msgObj.message}</span></li>`;
         msgUl.append(liHtml);
     }
 
     $.sendMessage = () => {
         let message = $("#message").val();
+        if (message == null || message === '') {
+            return;
+        }
         let writer = $("#writer").val();
         let chatMessageDto = {
             "msgType": "MESSAGE"
             , "roomId": "{{chatRoomDto.roomId}}"
             , "writer": writer
-            , "message": writer + ": " + message
+            , "message": message
         };
         webSocket.send(JSON.stringify(chatMessageDto));
     }
@@ -62,7 +67,7 @@
             "msgType": "OUT"
             , "roomId": "{{chatRoomDto.roomId}}"
             , "writer": writer
-            , "message": writer + "님이 나갔습니다."
+            , "message": ""
         };
         webSocket.send(JSON.stringify(chatMessageDto));
         webSocket.close();

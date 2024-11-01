@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Sb3websocketApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Sb3websocketApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Sb3websocketApplication.class, args);
+    }
 
 }
