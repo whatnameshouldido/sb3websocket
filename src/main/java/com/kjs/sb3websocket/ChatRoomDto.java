@@ -19,4 +19,7 @@ public class ChatRoomDto {
     private String roomName;
     private String roomId;
     private final List<WebSocketSession> sessionList = new ArrayList<>();
+    public Integer getCount() {
+        return sessionList.size();
+    }
 }

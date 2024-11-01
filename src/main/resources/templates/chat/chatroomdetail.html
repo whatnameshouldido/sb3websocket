@@ -50,7 +50,7 @@
             "msgType": "MESSAGE"
             , "roomId": "{{chatRoomDto.roomId}}"
             , "writer": writer
-            , "message": writer + ":" + message
+            , "message": writer + ": " + message
         };
         webSocket.send(JSON.stringify(chatMessageDto));
     }
@@ -62,7 +62,7 @@
             "msgType": "OUT"
             , "roomId": "{{chatRoomDto.roomId}}"
             , "writer": writer
-            , "message": ""
+            , "message": writer + "님이 나갔습니다."
         };
         webSocket.send(JSON.stringify(chatMessageDto));
         webSocket.close();
